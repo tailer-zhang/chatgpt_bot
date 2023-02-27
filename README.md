@@ -1,8 +1,6 @@
 # ChatGPT Telegram Bot: **Fast. No daily limits. Special chat modes**
 
-<div align="center">
-<img src="https://raw.githubusercontent.com/karfly/chatgpt_telegram_bot/main/static/header.png" align="center" style="width: 100%" />
-</div>
+
 
 <p align="center">
 <a href="https://t.me/chatgpt_karfly_bot" alt="Run Telegram Bot shield"><img src="https://img.shields.io/badge/RUN-Telegram%20Bot-blue" /></a>
@@ -12,7 +10,7 @@ We all love [chat.openai.com](https://chat.openai.com), but... It's TERRIBLY lag
 
 This repo is ChatGPT re-created with GPT-3.5 LLM as Telegram Bot. **And it works great.**
 
-You can deploy your own bot, or use mine: [@chatgpt_karfly_bot](https://t.me/chatgpt_karfly_bot)
+You can deploy your own bot, or use mine: [@ChatGPT_QA_bot](https://t.me/ChatGPT_QA_bot)
 
 ## Features
 - Low latency replies (it usually takes about 3-5 seconds) 
@@ -48,3 +46,6 @@ docker-compose --env-file config/config.env up --build
 
 ## References
 1. [*Build ChatGPT from GPT-3*](https://learnprompting.org/docs/applied_prompting/build_chatgpt)
+2. [*register ChatGPT*](https://blogword168.com/index.php/2023/02/05/%e5%a6%82%e4%bd%95%e6%b3%a8%e5%86%8cchatgpt/)
+
+## Donate
