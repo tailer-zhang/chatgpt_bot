@@ -49,3 +49,7 @@ docker-compose --env-file config/config.env up --build
 2. [*register ChatGPT*](https://blogword168.com/index.php/2023/02/05/%e5%a6%82%e4%bd%95%e6%b3%a8%e5%86%8cchatgpt/)
 
 ## Donate
+If this project help you reduce time to deploy, you can give me a cup of coffee :)
+
+WeChat Pay:  
+<img src="https://github.com/tailer-zhang/chatgpt_bot/blob/master/static/wechat.png" width="300" />
