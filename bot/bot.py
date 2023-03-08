@@ -194,10 +194,16 @@ async def show_balance_handle(update: Update, context: CallbackContext):
     db.set_user_attribute(user_id, "last_interaction", datetime.now())
 
     n_used_tokens = db.get_user_attribute(user_id, "n_used_tokens")
-    n_spent_dollars = n_used_tokens * (0.02 / 1000)
+
+    price_per_1000_tokens = config.chatgpt_price_per_1000_tokens if config.use_chatgpt_api else config.gpt_price_per_1000_tokens
+    n_spent_dollars = n_used_tokens * (price_per_1000_tokens / 1000)
 
     text = f"You spent <b>{n_spent_dollars:.03f}$</b>\n"
-    text += f"You used <b>{n_used_tokens}</b> tokens <i>(price: 0.02$ per 1000 tokens)</i>\n"
+    text += f"You used <b>{n_used_tokens}</b> tokens\n\n"
+
+    text += "🏷️ Prices\n"
+    text += f"<i>- ChatGPT: {price_per_1000_tokens}$ per 1000 tokens\n"
+    text += f"- Whisper (voice recognition): {config.whisper_price_per_1_min}$ per 1 minute</i>"
 
     await update.message.reply_text(text, parse_mode=ParseMode.HTML)
 
