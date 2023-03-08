@@ -1,0 +1,9 @@
+telegram_token: "6004477642:AAEgJJJHu2T1GVmA0p4Tms6rNSKWSBZKSp8"
+openai_api_key: "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"
+allowed_telegram_usernames: []  # if empty, the bot is available to anyone
+use_chatgpt_api: true
+new_dialog_timeout: 600  # new dialog starts after timeout (in seconds)
+
+chatgpt_price_per_1000_tokens: 0.002
+gpt_price_per_1000_tokens: 0.02
+whisper_price_per_1_min: 0.006

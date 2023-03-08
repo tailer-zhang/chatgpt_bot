@@ -38,11 +38,12 @@ OPENAI_COMPLETION_OPTIONS = {
     "presence_penalty": 0
 }
 
+
 class ChatGPT:
     def __init__(self, use_chatgpt_api=True):
         self.use_chatgpt_api = use_chatgpt_api
     
-    def send_message(self, message, dialog_messages=[], chat_mode="assistant"):
+    async def send_message(self, message, dialog_messages=[], chat_mode="assistant"):
         if chat_mode not in CHAT_MODES.keys():
             raise ValueError(f"Chat mode {chat_mode} is not supported")
 
@@ -58,18 +59,18 @@ class ChatGPT:
                         **OPENAI_COMPLETION_OPTIONS
                     )
                     answer = r.choices[0].message["content"]
-                else
+                else:
                     prompt = self._generate_prompt(message, dialog_messages, chat_mode)
-                    r = openai.Completion.create(
+                    r = await openai.Completion.acreate(
                         engine="text-davinci-003",
                         prompt=prompt,
                         **OPENAI_COMPLETION_OPTIONS
                     )
                     answer = r.choices[0].text
-                    answer = self._postprocess_answer(answer)
-    
-                    n_used_tokens = r.usage.total_tokens
 
+                answer = self._postprocess_answer(answer)
+                n_used_tokens = r.usage.total_tokens
+                
             except openai.error.InvalidRequestError as e:  # too many tokens
                 if len(dialog_messages) == 0:
                     raise ValueError("Dialog messages is reduced to zero, but still has too many tokens to make completion") from e
@@ -79,7 +80,7 @@ class ChatGPT:
 
         n_first_dialog_messages_removed = n_dialog_messages_before - len(dialog_messages)
 
-        return answer, prompt, n_used_tokens, n_first_dialog_messages_removed
+        return answer, n_used_tokens, n_first_dialog_messages_removed
 
     def _generate_prompt(self, message, dialog_messages, chat_mode):
         prompt = CHAT_MODES[chat_mode]["prompt_start"]
@@ -107,8 +108,13 @@ class ChatGPT:
             messages.append({"role": "assistant", "content": dialog_message["bot"]})
         messages.append({"role": "user", "content": message})
 
-        return messages        
+        return messages
 
     def _postprocess_answer(self, answer):
         answer = answer.strip()
         return answer
+
+
+async def transcribe_audio(audio_file):
+    r = await openai.Audio.atranscribe("whisper-1", audio_file)
+    return r["text"]
